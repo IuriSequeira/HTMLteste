@@ -69,11 +69,121 @@
             font-size: 0.9em;
         }
     </style>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - Empresa de Programação Web</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2E0249;
+            color: #FFFFFF;
+        }
+
+        header {
+            background-color: #570A57;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: #FFFFFF;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content h3 {
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: #A91079;
+        }
+
+        .content p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .team {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .team-member {
+            text-align: center;
+            margin: 10px;
+            flex-basis: 30%;
+        }
+
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #A91079;
+        }
+
+        .team-member h4 {
+            margin: 10px 0 5px;
+            font-size: 1.2em;
+        }
+
+        .team-member p {
+            font-size: 0.9em;
+            color: #CCCCCC;
+        }
+
+        footer {
+            background-color: #570A57;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
 
     <header>
-        <h1>Meu Site Roxo</h1>
+        <h1>Empresa de Programação Web</h1>
         <nav>
             <a href="index.html">Início</a>
             <a href="sobre.html">Sobre</a>
@@ -84,11 +194,51 @@
 
     <div class="content">
         <h2>Sobre Nós</h2>
-        <p>Esta é a página Sobre. Aqui pode encontrar informações sobre a empresa e todos os projetos.</p>
+        <p>
+            Somos uma empresa especializada em desenvolvimento web, criando soluções digitais personalizadas para nossos clientes. 
+            Com uma equipe de profissionais experientes, estamos comprometidos em entregar projetos de alta qualidade, inovadores e que atendam às necessidades do seu negócio.
+        </p>
+
+        <h3>Nossa Missão</h3>
+        <p>
+            Nossa missão é fornecer soluções tecnológicas que impulsionem o crescimento dos nossos clientes, ajudando-os a alcançar seus objetivos de negócios por meio de websites e aplicações web de alto desempenho.
+        </p>
+
+        <h3>Nossa Visão</h3>
+        <p>
+            Queremos ser reconhecidos como uma das principais empresas de desenvolvimento web, conhecida pela excelência no atendimento ao cliente e pela qualidade dos nossos projetos.
+        </p>
+
+        <h3>Nossos Valores</h3>
+        <p>
+            - Inovação: Buscamos sempre as melhores tecnologias e práticas.<br>
+            - Qualidade: Entregamos projetos com excelência e atenção aos detalhes.<br>
+            - Transparência: Mantemos uma comunicação clara e honesta com nossos clientes.<br>
+            - Compromisso: Estamos dedicados ao sucesso do seu projeto.
+        </p>
+
+        <h3>Nossa Equipe</h3>
+        <div class="team">
+            <div class="team-member">
+                <img src="https://via.placeholder.com/100" alt="Membro da Equipe 1">
+                <h4>João Silva</h4>
+                <p>Desenvolvedor Front-end</p>
+            </div>
+            <div class="team-member">
+                <img src="https://via.placeholder.com/100" alt="Membro da Equipe 2">
+                <h4>Maria Santos</h4>
+                <p>Desenvolvedora Back-end</p>
+            </div>
+            <div class="team-member">
+                <img src="https://via.placeholder.com/100" alt="Membro da Equipe 3">
+                <h4>Carlos Oliveira</h4>
+                <p>Designer UI/UX</p>
+            </div>
+        </div>
     </div>
 
     <footer>
-        <p>&copy; 2023 Meu Site Roxo. Todos os direitos reservados.</p>
+        <p>&copy; 2023 Empresa de Programação Web. Todos os direitos reservados.</p>
     </footer>
 
 </body>

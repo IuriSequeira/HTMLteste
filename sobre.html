@@ -3,96 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre - Meu Site Roxo</title>
-    <style>
-        /* O mesmo estilo do index.html */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #2E0249;
-            color: #FFFFFF;
-        }
-
-        header {
-            background-color: #570A57;
-            padding: 20px;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-
-        nav {
-            margin-top: 10px;
-        }
-
-        nav a {
-            color: #FFFFFF;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.2em;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        .content {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .content h2 {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        .content p {
-            font-size: 1.2em;
-            line-height: 1.6;
-        }
-
-        footer {
-            background-color: #570A57;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 0.9em;
-        }
-    </style>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre - Empresa de Programação Web</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #2E0249;
+            background: linear-gradient(135deg, #2E0249, #5a047cca); /* Gradiente roxo */
             color: #FFFFFF;
         }
 
         header {
-            background-color: #570A57;
+            background-color: #270036;
             padding: 20px;
             text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra */
         }
 
         header h1 {
             margin: 0;
             font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra no texto */
         }
 
         nav {
@@ -104,16 +35,25 @@
             text-decoration: none;
             margin: 0 15px;
             font-size: 1.2em;
+            padding: 10px 20px; /* Espaçamento interno */
+            border-radius: 25px; /* Bordas arredondadas */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Transição suave */
         }
 
         nav a:hover {
-            text-decoration: underline;
+            background-color: #6d0098ca; /* Cor de fundo ao passar o mouse */
+            transform: translateY(-3px); /* Efeito de levantar */
         }
 
         .content {
             padding: 20px;
             max-width: 800px;
-            margin: 0 auto;
+            margin: 20px auto;
+            background-color: rgb(174, 174, 174); /* Fundo semi-transparente */
+            border-radius: 15px; /* Bordas arredondadas */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra */
+            animation: fadeIn 1s ease-out; /* Animação de entrada */
+            text-align: center;
         }
 
         .content h2 {
@@ -126,13 +66,14 @@
             font-size: 1.5em;
             margin-top: 30px;
             margin-bottom: 10px;
-            color: #A91079;
+            color: #270036; /* Cor destacada */
         }
 
         .content p {
             font-size: 1.1em;
             line-height: 1.6;
             text-align: justify;
+            text-align: center;
         }
 
         .team {
@@ -146,13 +87,22 @@
             text-align: center;
             margin: 10px;
             flex-basis: 30%;
+            padding: 20px;
+            background-color: #270036; /* Fundo escuro */
+            border-radius: 10px; /* Bordas arredondadas */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição */
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px); /* Move a caixa para cima */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Adiciona sombra */
         }
 
         .team-member img {
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            border: 3px solid #A91079;
+            border: 3px solid #6b6b6b; /* Borda roxa */
         }
 
         .team-member h4 {
@@ -162,21 +112,55 @@
 
         .team-member p {
             font-size: 0.9em;
-            color: #CCCCCC;
+            color: #CCCCCC; /* Texto cinza claro */
+            
         }
 
         footer {
-            background-color: #570A57;
+            background-color: #270036;
             padding: 10px;
             text-align: center;
             position: fixed;
             bottom: 0;
             width: 100%;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3); /* Sombra na parte superior */
         }
 
         footer p {
             margin: 0;
             font-size: 0.9em;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em; /* Reduz o tamanho do título */
+            }
+
+            nav a {
+                font-size: 1em; /* Reduz o tamanho dos links */
+                padding: 8px 15px; /* Ajusta o espaçamento */
+            }
+
+            .content {
+                margin: 10px; /* Reduz a margem */
+                padding: 15px; /* Reduz o padding */
+            }
+
+            .team-member {
+                flex-basis: 100%; /* Ocupa toda a largura */
+                margin: 10px 0;
+            }
         }
     </style>
 </head>
@@ -193,7 +177,7 @@
     </header>
 
     <div class="content">
-        <h2>Sobre Nós</h2>
+        <h3>Sobre Nós</h3>
         <p>
             Somos uma empresa especializada em desenvolvimento web, criando soluções digitais personalizadas para nossos clientes. 
             Com uma equipe de profissionais experientes, estamos comprometidos em entregar projetos de alta qualidade, inovadores e que atendam às necessidades do seu negócio.
@@ -220,18 +204,18 @@
         <h3>Nossa Equipe</h3>
         <div class="team">
             <div class="team-member">
-                <img src="https://via.placeholder.com/100" alt="Membro da Equipe 1">
-                <h4>João Silva</h4>
+                <img src="imagens/irs.png" alt="Iúri Sequeira">
+                <h4>Iúri Sequeira</h4>
                 <p>Desenvolvedor Front-end</p>
             </div>
             <div class="team-member">
-                <img src="https://via.placeholder.com/100" alt="Membro da Equipe 2">
-                <h4>Maria Santos</h4>
-                <p>Desenvolvedora Back-end</p>
+                <img src="imagens/irs.png" alt="Iúri Sequeira">
+                <h4>Iúri Sequeira</h4>
+                <p>Desenvolvedor Back-end</p>
             </div>
             <div class="team-member">
-                <img src="https://via.placeholder.com/100" alt="Membro da Equipe 3">
-                <h4>Carlos Oliveira</h4>
+                <img src="imagens/irs.png" alt="Iúri Sequeira">
+                <h4>Iúri Sequeira</h4>
                 <p>Designer UI/UX</p>
             </div>
         </div>

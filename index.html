@@ -3,29 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início - Meu Site Roxo</title>
+    <title>Início - IRS CONSULTING</title>
     <style>
+        /* Estilos gerais da página */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #2E0249, #570A57);
+            background: linear-gradient(135deg, #2E0249, #5a047cca); /* Gradiente de fundo roxo */
             color: #FFFFFF;
         }
 
+        /* Estilo do cabeçalho */
         header {
-            background-color: #bdbdbd;
+            background-color: #270036;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para efeito visual */
         }
 
         header h1 {
             margin: 0;
             font-size: 2.5em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra no texto do título */
         }
 
+        /* Estilo da barra de navegação */
         nav {
             margin-top: 10px;
         }
@@ -36,44 +39,94 @@
             margin: 0 15px;
             font-size: 1.2em;
             padding: 10px 20px;
-            border-radius: 25px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 25px; /* Bordas arredondadas nos links */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Transição suave */
         }
 
+        /* Efeito ao passar o mouse nos links */
         nav a:hover {
-            background-color: #A91079;
-            transform: translateY(-3px);
+            background-color: #6d0098ca;
+            transform: translateY(-3px); /* Efeito de "levantar" o link */
         }
 
+        /* Estilo da seção de conteúdo principal */
         .content {
             padding: 20px;
-            text-align: center;
-            background-color: rgba(87, 10, 87, 0.8);
-            margin: 20px auto;
             max-width: 800px;
+            margin: 20px auto;
+            background-color: rgb(174, 174, 174); /* Fundo cinza claro */
             border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 1s ease-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra */
+            animation: fadeIn 1s ease-out; /* Animação de entrada */
+            text-align: center;
         }
 
+        /* Estilo dos títulos */
         .content h2 {
             font-size: 2em;
             margin-bottom: 20px;
         }
 
-        .content p {
-            font-size: 1.2em;
-            line-height: 1.6;
+        /* Estilo das informações de contacto */
+        .contact-info {
+            margin-bottom: 30px;
+            line-height: 1.8;
+            text-align: left;
         }
 
+        .contact-info h3 {
+            color: #270036; /* Cor do subtítulo */
+        }
+
+        /* Estilo do contêiner do formulário */
+        .form-container {
+            text-align: center;
+        }
+
+        /* Estilo do formulário e seus elementos */
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-container input,
+        .form-container textarea {
+            width: 80%;
+            max-width: 500px;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra nos campos */
+        }
+
+        .form-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #270036; /* Cor do botão */
+            color: #FFFFFF;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Efeito ao passar o mouse no botão */
+        .form-container button:hover {
+            background-color: #6d0098ca;
+            transform: translateY(-3px);
+        }
+
+        /* Estilo do rodapé */
         footer {
-            background-color: #570A57;
+            background-color: #270036;
             padding: 10px;
             text-align: center;
             position: fixed;
             bottom: 0;
             width: 100%;
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3); /* Sombra no topo do rodapé */
         }
 
         footer p {
@@ -81,6 +134,7 @@
             font-size: 0.9em;
         }
 
+        /* Animação de entrada da seção de conteúdo */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -91,28 +145,12 @@
                 transform: translateY(0);
             }
         }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-
-            nav a {
-                font-size: 1em;
-                padding: 8px 15px;
-            }
-
-            .content {
-                margin: 10px;
-                padding: 15px;
-            }
-        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Meu Site Roxo</h1>
+        <h1>IRS CONSULTING</h1>
         <nav>
             <a href="index.html">Início</a>
             <a href="sobre.html">Sobre</a>
@@ -122,12 +160,12 @@
     </header>
 
     <div class="content">
-        <h2>Bem-vindo ao Meu Site</h2>
+        <h2>Bem-vindo à IRS CONSULTING</h2>
         <p>Esta é a página inicial do site. Aqui você pode adicionar mais conteúdo, imagens e outras seções conforme necessário.</p>
     </div>
 
     <footer>
-        <p>&copy; 2023 Meu Site Roxo. Todos os direitos reservados.</p>
+        <p>&copy; 2025 Empresa IRS CONSULTING. Todos os direitos reservados.</p>
     </footer>
 
 </body>

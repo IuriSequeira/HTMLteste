@@ -173,12 +173,12 @@
         <h3>Fale Conosco</h3>
         <div class="form-container">
             <!-- Formulário com validação JavaScript -->
-            <form onsubmit="return validarFormulario()">
-                <input type="text" id="nome" placeholder="Seu Nome" required>
-                <input type="email" id="email" placeholder="Seu Email" required>
-                <textarea id="mensagem" placeholder="Sua Mensagem" rows="5" required></textarea>
+            <form action="/mensagem" method="POST">
+                <input type="text" name="nome" placeholder="Seu Nome" required>
+                <input type="email" name="email" placeholder="Seu Email" required>
+                <textarea name="mensagem" placeholder="Sua Mensagem" rows="5" required></textarea>
                 <button type="submit">Enviar</button>
-            </form>
+            </form>            
         </div>
     </div>
 

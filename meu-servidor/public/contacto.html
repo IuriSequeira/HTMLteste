@@ -146,14 +146,27 @@
             }
         }
 
-        /* Estilo da mensagem de sucesso */
+        /* Estilo da caixa de mensagem de sucesso */
         .success-message {
-            background-color: #28a745;
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 20px;
-            display: none; /* Inicialmente oculta */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(85, 0, 204, 0.5); /* Cor roxa com opacidade 50% */
+            color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1s ease-out, visibility 1s ease-out;
+        }
+
+        /* Esconde a mensagem após o fade */
+        .success-message.fade-out {
+            opacity: 0;
+            visibility: hidden;
         }
     </style>
 </head>
@@ -183,14 +196,12 @@
         <h3>Fale Conosco</h3>
         <div class="form-container">
             <!-- Formulário com validação JavaScript -->
-            <form id="formulario-contato">
-                <input type="text" id="nome" name="nome" placeholder="Seu Nome" required>
-                <input type="email" id="email" name="email" placeholder="Seu Email" required>
-                <textarea id="mensagem" name="mensagem" placeholder="Sua Mensagem" rows="5" required></textarea>
+            <form id="formulario-contato" action="/mensagem" method="POST">
+                <input type="text" name="nome" id="nome" placeholder="Seu Nome" required>
+                <input type="email" name="email" id="email" placeholder="Seu Email" required>
+                <textarea name="mensagem" id="mensagem" placeholder="Sua Mensagem" rows="5" required></textarea>
                 <button type="submit">Enviar</button>
-            </form>
-            <!-- Caixa de sucesso que aparece após o envio -->
-            <div id="success-message" class="success-message">Mensagem enviada com sucesso! Obrigado pelo seu contacto.</div>
+            </form>            
         </div>
     </div>
 
@@ -198,61 +209,69 @@
         <p>&copy; 2025 Empresa IRS CONSULTING. Todos os direitos reservados.</p>
     </footer>
 
-<!-- Script de validação do formulário -->
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const form = document.getElementById("formulario-contato");
-        const successMessage = document.getElementById("success-message");
+    <!-- Caixa de sucesso (oculta por padrão) -->
+    <div id="successMessage" class="success-message" style="display: none;">
+        Mensagem enviada com sucesso!
+    </div>
 
-        form.addEventListener("submit", async (event) => {
-            event.preventDefault(); // Impede o envio tradicional do formulário
+    <!-- Script de validação do formulário -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Captura o formulário e adiciona evento de submissão
+            const form = document.getElementById("formulario-contato");
+            const successMessage = document.getElementById("successMessage");
 
-            const nome = document.getElementById("nome").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const mensagem = document.getElementById("mensagem").value.trim();
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault(); // Impede o envio tradicional do formulário
 
-            // Validação de campos vazios
-            if (!nome || !email || !mensagem) {
-                alert("Por favor, preencha todos os campos.");
-                return;
-            }
+                const nome = document.getElementById("nome").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const mensagem = document.getElementById("mensagem").value.trim();
 
-            // Validação simples de e-mail
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert("Por favor, insira um e-mail válido.");
-                return;
-            }
-
-            // Validação de comprimento da mensagem
-            if (mensagem.length < 10) {
-                alert("A mensagem deve conter pelo menos 10 caracteres.");
-                return;
-            }
-
-            // Simulação de envio de dados via fetch
-            try {
-                const response = await fetch("/mensagem", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ nome, email, mensagem }),
-                });
-
-                if (response.ok) {
-                    successMessage.style.display = "block"; // Exibe a mensagem de sucesso
-                    form.reset(); // Limpa o formulário após o sucesso
-                } else {
-                    alert("Ocorreu um erro ao enviar a mensagem. Tente novamente.");
+                // Validação de campos vazios
+                if (!nome || !email || !mensagem) {
+                    alert("Por favor, preencha todos os campos.");
+                    return;
                 }
-            } catch (error) {
-                alert("Erro de conexão. Verifique sua internet.");
-                console.error("Erro ao enviar a mensagem:", error);
-            }
-        });
-    });
-</script>
 
+                // Validação simples de e-mail
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    alert("Por favor, insira um e-mail válido.");
+                    return;
+                }
+
+                // Validação de comprimento da mensagem
+                if (mensagem.length < 10) {
+                    alert("A mensagem deve conter pelo menos 10 caracteres.");
+                    return;
+                }
+
+                // Simulação de envio de dados via fetch
+                try {
+                    const response = await fetch("/mensagem", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ nome, email, mensagem }),
+                    });
+
+                    if (response.ok) {
+                        successMessage.style.display = "block"; // Exibe a mensagem de sucesso
+                        setTimeout(() => {
+                            successMessage.classList.add("fade-out"); // Inicia o efeito de fade
+                        }, 5000); // Tempo para o fade-out (5 segundos)
+                        form.reset(); // Limpa o formulário após o sucesso
+                    } else {
+                        alert("Ocorreu um erro ao enviar a mensagem. Tente novamente.");
+                    }
+                } catch (error) {
+                    alert("Erro de conexão. Verifique sua internet.");
+                    console.error("Erro ao enviar a mensagem:", error);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

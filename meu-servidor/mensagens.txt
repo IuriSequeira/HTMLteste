@@ -6,3 +6,11 @@ Nome: Iúri Sequeira
 Email: IuriSequeira@IuriSequeira.pt
 Mensagem: Iúri Sequeira.
 
+Nome: iuri
+Email: iuri@iuri.pt
+Mensagem: iuri sequeira
+
+Nome: iuri@iuri.pt
+Email: iuri@iuri.pt
+Mensagem: iuri@iuri.pt
+

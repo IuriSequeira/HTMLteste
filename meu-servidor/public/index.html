@@ -211,7 +211,7 @@
         <h2>Login</h2>
         <p>Introduza o seu email e senha para aceder à sua conta. Caso ainda não tenha uma conta, <a href="javascript:void(0)" class="register-link" onclick="showPopup()">crie uma nova conta</a>.</p>
         <div class="form-container">
-            <form action="/login" method="POST">
+            <form id="loginForm">
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Senha" required>
                 <button type="submit">Entrar</button>
@@ -223,23 +223,22 @@
     <div class="popup" id="popup">
         <div class="popup-content">
             <h2>Criar uma nova conta</h2>
-            <form action="/register" method="POST">
-                <input type="text" name="username" placeholder="Nome de Utilizador" required> <!-- Novo campo para nome de utilizador -->
+            <form id="registerForm">
+                <input type="text" name="nome" placeholder="Nome Completo" required>
                 <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Senha" required>
-                <input type="password" name="confirm_password" placeholder="Confirmar Senha" required>
-                <button type="submit">Criar Conta</button>
+                <input type="password" name="senha" placeholder="Senha" required>
+                <button type="submit">Registrar</button>
             </form>
             <button onclick="closePopup()">Fechar</button>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 Empresa IRS CONSULTING. Todos os direitos reservados.</p>
+        <p>&copy; 2025 IRS CONSULTING. Todos os direitos reservados.</p>
     </footer>
 
     <script>
-        // Função para mostrar o pop-up
+        // Função para exibir o pop-up
         function showPopup() {
             document.getElementById('popup').style.display = 'flex';
         }
@@ -248,6 +247,65 @@
         function closePopup() {
             document.getElementById('popup').style.display = 'none';
         }
+
+        // Enviar dados do formulário de login
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Impede o envio normal do formulário
+
+            const formData = new FormData(this);
+            const data = {
+                email: formData.get('email'),
+                senha: formData.get('password')
+            };
+
+            fetch("http://localhost:3000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.sucesso) {
+                    alert(data.sucesso);
+                    // Redirecionar ou fazer algo após o login bem-sucedido
+                } else {
+                    alert(data.erro);
+                }
+            })
+            .catch(error => alert("Erro ao fazer login"));
+        });
+
+        // Enviar dados do formulário de registro
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Impede o envio normal do formulário
+
+            const formData = new FormData(this);
+            const data = {
+                nome: formData.get('nome'),
+                email: formData.get('email'),
+                senha: formData.get('senha')
+            };
+
+            fetch("http://localhost:3000/registo", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.sucesso) {
+                    alert(data.sucesso);
+                    closePopup(); // Fechar o pop-up após o registro bem-sucedido
+                } else {
+                    alert(data.erro);
+                }
+            })
+            .catch(error => alert("Erro ao registrar"));
+        });
     </script>
 
 </body>

@@ -1,38 +1,41 @@
+require("dotenv").config();
+console.log("JWT_SECRET carregado:", process.env.JWT_SECRET);
+
 const express = require("express");
-const mysql = require("mysql2"); // Importa o pacote mysql2
-const bcrypt = require("bcryptjs"); // Para hash de senhas
-const jwt = require("jsonwebtoken"); // Para criar o token de autenticação
+const mysql = require("mysql2/promise");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const path = require("path");
+
+const jwtSecret = process.env.JWT_SECRET || "chave-padrao";
 
 const app = express();
 const PORT = 3000;
 
-// Configuração do banco de dados MySQL
-const connection = mysql.createConnection({
-    host: '127.0.0.1', // Ou o IP do seu servidor de banco de dados
-    port: 3306, // Porta de conexão
-    user: 'root', // Seu usuário MySQL
-    password: 'iurisequeira', // Senha do seu banco
-    database: 'meu_banco.sql' // Nome do banco de dados
-});
-
-// Conectar ao banco de dados MySQL
-connection.connect(err => {
-    if (err) {
-        console.error('Erro ao conectar ao banco de dados: ' + err.stack);
-        return;
+// Conexão com o banco de dados MySQL
+let connection;
+(async () => {
+    try {
+        connection = await mysql.createConnection({
+            host: "127.0.0.1",
+            port: 3306,
+            user: "root",
+            password: "iurisequeira",
+            database: "basedados",
+        });
+        console.log("Conectado à base de dados MySQL.");
+    } catch (err) {
+        console.error("Erro ao conectar ao banco de dados:", err);
     }
-    console.log('Conectado ao banco de dados MySQL como ID ' + connection.threadId);
-});
+})();
 
 // Middleware
-app.use(express.json()); // Suporte para JSON
-app.use(express.urlencoded({ extended: true })); // Suporte para formulários
-app.use(require("cors")()); // Permite requisições de outras origens
-
-// Serve arquivos estáticos da pasta "public"
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(require("cors")());
 app.use(express.static(path.join(__dirname, "public")));
 
+// Rota de registro
 app.post("/registo", async (req, res) => {
     const { nome, email, senha } = req.body;
 
@@ -41,7 +44,10 @@ app.post("/registo", async (req, res) => {
     }
 
     try {
-        const [rows] = await connection.promise().query('SELECT * FROM usuarios WHERE email = ?', [email]);
+        const [rows] = await connection.execute(
+            "SELECT * FROM utilizadores WHERE email = ?",
+            [email]
+        );
 
         if (rows.length > 0) {
             return res.status(400).json({ erro: "Email já está em uso." });
@@ -49,56 +55,55 @@ app.post("/registo", async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(senha, 10);
 
-        await connection.promise().query('INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)', [nome, email, hashedPassword]);
+        await connection.execute(
+            "INSERT INTO utilizadores (nome, email, senha) VALUES (?, ?, ?)",
+            [nome, email, hashedPassword]
+        );
 
-        res.status(200).json({ sucesso: "Usuário registado com sucesso." });
+        res.status(200).json({ sucesso: "Utilizador registado com sucesso." });
     } catch (err) {
-        console.error("Erro:", err);
-        res.status(500).json({ erro: "Erro ao processar seu pedido. Tente novamente." });
+        console.error("Erro ao registrar utilizador:", err);
+        res.status(500).json({ erro: "Erro ao processar seu pedido." });
     }
 });
 
 // Rota de login
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
     const { email, senha } = req.body;
 
     if (!email || !senha) {
         return res.status(400).json({ erro: "Email e senha são obrigatórios." });
     }
 
-    // Verificar se o usuário existe
-    const query = 'SELECT * FROM usuarios WHERE email = ?';
-    connection.query(query, [email], (err, results) => {
-        if (err) {
-            console.error("Erro ao verificar o usuário:", err);
-            return res.status(500).json({ erro: "Erro ao processar seu pedido. Tente novamente." });
-        }
+    try {
+        const [results] = await connection.execute(
+            "SELECT * FROM utilizadores WHERE email = ?",
+            [email]
+        );
 
         if (results.length === 0) {
-            return res.status(400).json({ erro: "Usuário não encontrado." });
+            return res.status(400).json({ erro: "Utilizador não encontrado." });
         }
 
-        // Comparar a senha
-        bcrypt.compare(senha, results[0].senha, (err, isMatch) => {
-            if (err) {
-                console.error("Erro ao comparar a senha:", err);
-                return res.status(500).json({ erro: "Erro ao processar sua senha. Tente novamente." });
-            }
+        const isMatch = await bcrypt.compare(senha, results[0].senha);
 
-            if (!isMatch) {
-                return res.status(400).json({ erro: "Senha incorreta." });
-            }
+        if (!isMatch) {
+            return res.status(400).json({ erro: "Senha incorreta." });
+        }
 
-            // Criar o token JWT
-            const token = jwt.sign({ id: results[0].id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-            console.log("Usuário autenticado com sucesso.");
-            res.status(200).json({
-                sucesso: "Login bem-sucedido.",
-                token: token // Enviar o token de autenticação para o cliente
-            });
+        const token = jwt.sign({ id: results[0].id }, jwtSecret, {
+            expiresIn: "1h",
         });
-    });
+
+        console.log("Utilizador autenticado com sucesso.");
+        res.status(200).json({
+            sucesso: "Login bem-sucedido.",
+            token: token,
+        });
+    } catch (err) {
+        console.error("Erro ao processar o login:", err);
+        res.status(500).json({ erro: "Erro ao processar seu pedido." });
+    }
 });
 
 // Endpoint simples para verificar status do servidor

@@ -1,0 +1,157 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #2E0249, #5a047cca); /* Gradiente roxo */
+    color: #FFFFFF;
+}
+
+header {
+    background-color: #270036;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra no texto */
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: #FFFFFF;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.2em;
+    padding: 10px 20px; /* Espaçamento interno */
+    border-radius: 25px; /* Bordas arredondadas */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transição suave */
+}
+
+nav a:hover {
+    background-color: #6d0098ca; /* Cor de fundo ao passar o mouse */
+    transform: translateY(-3px); /* Efeito de levantar */
+}
+
+.content {
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: rgb(174, 174, 174); /* Fundo semi-transparente */
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra */
+    animation: fadeIn 1s ease-out; /* Animação de entrada */
+    text-align: center;
+}
+
+.content h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.content h3 {
+    font-size: 1.5em;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #270036; /* Cor destacada */
+}
+
+.content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    text-align: justify;
+    text-align: center;
+}
+
+.team {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.team-member {
+    text-align: center;
+    margin: 10px;
+    flex-basis: 30%;
+    padding: 20px;
+    background-color: #270036; /* Fundo escuro */
+    border-radius: 10px; /* Bordas arredondadas */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição */
+}
+
+.team-member:hover {
+    transform: translateY(-10px); /* Move a caixa para cima */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Adiciona sombra */
+}
+
+.team-member img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #6b6b6b; /* Borda roxa */
+}
+
+.team-member h4 {
+    margin: 10px 0 5px;
+    font-size: 1.2em;
+}
+
+.team-member p {
+    font-size: 0.9em;
+    color: #CCCCCC; /* Texto cinza claro */
+    
+}
+
+footer {
+    background-color: #270036;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3); /* Sombra na parte superior */
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em; /* Reduz o tamanho do título */
+    }
+
+    nav a {
+        font-size: 1em; /* Reduz o tamanho dos links */
+        padding: 8px 15px; /* Ajusta o espaçamento */
+    }
+
+    .content {
+        margin: 10px; /* Reduz a margem */
+        padding: 15px; /* Reduz o padding */
+    }
+
+    .team-member {
+        flex-basis: 100%; /* Ocupa toda a largura */
+        margin: 10px 0;
+    }
+}

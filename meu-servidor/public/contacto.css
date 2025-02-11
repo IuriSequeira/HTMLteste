@@ -1,0 +1,163 @@
+/* Estilos gerais da página */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #2E0249, #5a047cca); /* Gradiente de fundo roxo */
+    color: #FFFFFF;
+}
+
+/* Estilo do cabeçalho */
+header {
+    background-color: #270036;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para efeito visual */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra no texto do título */
+}
+
+/* Estilo da barra de navegação */
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: #FFFFFF;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    border-radius: 25px; /* Bordas arredondadas nos links */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transição suave */
+}
+
+/* Efeito ao passar o mouse nos links */
+nav a:hover {
+    background-color: #6d0098ca;
+    transform: translateY(-3px); /* Efeito de "levantar" o link */
+}
+
+/* Estilo da seção de conteúdo principal */
+.content {
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: rgb(174, 174, 174); /* Fundo cinza claro */
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra */
+    animation: fadeIn 1s ease-out; /* Animação de entrada */
+    text-align: center;
+}
+
+/* Estilo dos títulos */
+.content h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* Estilo das informações de contacto */
+.contact-info {
+    margin-bottom: 30px;
+    line-height: 1.8;
+    text-align: left;
+}
+
+.contact-info h3 {
+    color: #270036; /* Cor do subtítulo */
+}
+
+/* Estilo do contêiner do formulário */
+.form-container {
+    text-align: center;
+}
+
+/* Estilo do formulário e seus elementos */
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-container input,
+.form-container textarea {
+    width: 80%;
+    max-width: 500px;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra nos campos */
+}
+
+.form-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #270036; /* Cor do botão */
+    color: #FFFFFF;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Efeito ao passar o mouse no botão */
+.form-container button:hover {
+    background-color: #6d0098ca;
+    transform: translateY(-3px);
+}
+
+/* Estilo do rodapé */
+footer {
+    background-color: #270036;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3); /* Sombra no topo do rodapé */
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+/* Animação de entrada da seção de conteúdo */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estilo da caixa de mensagem de sucesso */
+.success-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(85, 0, 204, 0.5); /* Cor roxa com opacidade 50% */
+    color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s ease-out, visibility 1s ease-out;
+}
+
+/* Esconde a mensagem após o fade */
+.success-message.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}

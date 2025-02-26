@@ -1,56 +1,40 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // Captura o formulário e adiciona evento de submissão
-    const form = document.getElementById("formulario-contato");
-    const successMessage = document.getElementById("successMessage");
+const express = require("express");
+const fs = require("fs");
+const cors = require("cors");
+const path = require("path");
 
-    form.addEventListener("submit", async (event) => {
-        event.preventDefault(); // Impede o envio tradicional do formulário
+const app = express();
+const PORT = 3000;
 
-        const nome = document.getElementById("nome").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const mensagem = document.getElementById("mensagem").value.trim();
+// Middleware para permitir JSON e CORS
+app.use(express.json());
+app.use(cors());
 
-        // Validação de campos vazios
-        if (!nome || !email || !mensagem) {
-            alert("Por favor, preencha todos os campos.");
-            return;
+// Rota para receber os dados e guardá-los no ficheiro
+app.post("/mensagens", (req, res) => {
+    const { nome, email, mensagem } = req.body;
+
+    if (!nome || !email || !mensagem) {
+        return res.status(400).json({ error: "Todos os campos são obrigatórios." });
+    }
+
+    const novaMensagem = `Nome: ${nome}\nEmail: ${email}\nMensagem: ${mensagem}\n----------------------\n`;
+
+    // Caminho do ficheiro onde guardar as mensagens
+    const filePath = path.join(__dirname, "mensagens.txt");
+
+    // Adiciona a mensagem ao ficheiro
+    fs.appendFile(filePath, novaMensagem, (err) => {
+        if (err) {
+            console.error("Erro ao gravar a mensagem:", err);
+            return res.status(500).json({ error: "Erro ao gravar a mensagem." });
         }
-
-        // Validação simples de e-mail
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert("Por favor, insira um e-mail válido.");
-            return;
-        }
-
-        // Validação de comprimento da mensagem
-        if (mensagem.length < 10) {
-            alert("A mensagem deve conter pelo menos 10 caracteres.");
-            return;
-        }
-
-        // Simulação de envio de dados via fetch
-        try {
-            const response = await fetch("/mensagem", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ nome, email, mensagem }),
-            });
-
-            if (response.ok) {
-                successMessage.style.display = "block"; // Exibe a mensagem de sucesso
-                setTimeout(() => {
-                    successMessage.classList.add("fade-out"); // Inicia o efeito de fade
-                }, 5000); // Tempo para o fade-out (5 segundos)
-                form.reset(); // Limpa o formulário após o sucesso
-            } else {
-                alert("Ocorreu um erro ao enviar a mensagem. Tente novamente.");
-            }
-        } catch (error) {
-            alert("Erro de conexão. Verifique sua internet.");
-            console.error("Erro ao enviar a mensagem:", error);
-        }
+        console.log("Mensagem guardada com sucesso!");
+        res.status(200).json({ message: "Mensagem enviada com sucesso!" });
     });
+});
+
+// Iniciar o servidor
+app.listen(PORT, () => {
+    console.log(`Servidor a correr em http://localhost:${PORT}`);
 });
